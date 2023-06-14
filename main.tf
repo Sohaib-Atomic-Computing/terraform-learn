@@ -136,17 +136,18 @@ resource "aws_default_security_group" "default-sg" {
 # }
 
 resource "aws_instance" "myapp-server" {
-  ami = "ami-09db9d79b41ec058e"
-  instance_type = var.instance_type
-  subnet_id = aws_subnet.myapp-subnet-1.id
-  vpc_security_group_ids = [aws_default_security_group.default-sg.id]
-  availability_zone = var.avail_zone
+  ami                         = "ami-09db9d79b41ec058e"
+  instance_type               = var.instance_type
+  subnet_id                   = aws_subnet.myapp-subnet-1.id
+  vpc_security_group_ids      = [aws_default_security_group.default-sg.id]
+  availability_zone           = var.avail_zone
   associate_public_ip_address = true
-  key_name = "Frankfurt-Keypair"
-   tags = {
+  key_name                    = "Frankfurt-Keypair"
+  tags = {
     Name = "${var.env_prefix}-server"
   }
-  
+  user_data = file("entry-script.sh")
+
 }
 
 output "dev-vpc-id" {
