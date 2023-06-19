@@ -1,6 +1,7 @@
 # local .terraform dir
 
 .terraform/*
+Frankfurt-Key
 
 #tf state files
 
